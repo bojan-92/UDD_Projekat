@@ -28,7 +28,7 @@ public class UserController {
 		return "hello";
 	}
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String list(Model model) {
 		model.addAttribute("users", userService.listAllUsers());
 		System.out.println("Returning users:");
@@ -73,5 +73,5 @@ public class UserController {
 	public String delete(@PathVariable Integer id) {
 		userService.deleteUser(id);
 		return "redirect:/users";
-	}
+	}*/
 }
