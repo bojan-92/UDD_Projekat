@@ -27,7 +27,7 @@ public class UserController {
 		model.addAttribute("hello", hello);
 		return "hello";
 	}
-	
+
 	@RequestMapping("user/new")
 	public String newUser(Model model) {
 		model.addAttribute("user", new User());
@@ -40,34 +40,41 @@ public class UserController {
 		System.out.println("Returning users:");
 		return "users";
 	}
+
 	@RequestMapping("user/{id}")
 	public String showUser(@PathVariable Integer id, Model model) {
 		model.addAttribute("user", userService.getUserById(id));
 		return "userShow";
 	}
+
 	@RequestMapping("user/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model) {
 		model.addAttribute("user", userService.getUserById(id));
 		return "userEdit";
 	}
-	
+
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String saveUser(User user) {
 		userService.saveUser(user);
 		return "redirect:/user/" + user.getId();
 	}
-	/*@RequestMapping(value = "/user/update/{id}", method = RequestMethod.POST)
-	public String updateUser(@PathVariable Integer id, @RequestParam("name") String name,
-			@RequestParam("email") String email) {
+
+	@RequestMapping(value = "/user/update/{id}", method = RequestMethod.POST)
+	public String updateUser(@PathVariable Integer id, @RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName, @RequestParam("userName") String userName,
+			@RequestParam("userPassword") String userPassword) {
 		User user = userService.getUserById(id);
-		user.setFirName(name);
-		user.setEmail(email);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setUserName(userName);
+		user.setUserPassword(userPassword);
 		userService.saveUser(user);
 		return "redirect:/user/" + user.getId();
 	}
+
 	@RequestMapping("user/delete/{id}")
 	public String delete(@PathVariable Integer id) {
 		userService.deleteUser(id);
 		return "redirect:/users";
-	}*/
+	}
 }

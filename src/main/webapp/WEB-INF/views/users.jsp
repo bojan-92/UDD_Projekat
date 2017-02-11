@@ -9,26 +9,28 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach items="${users}" var="user">
-    ${user.name}<br>
-</c:forEach>
-
 <div class="container">
     <div>
         <h2>User List</h2>
         <table class="table table-striped">
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>E-mail</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Type</th>
+                <th></th>
+                <th></th>
             </tr>
             <c:forEach items="${users}" var="user">
             <tr>
                 <td><a href="/user/${user.id}">${user.id}</a></td>
-                <td>${user.name}</td>
-               	<td>${user.email}</td>
+                <td>${user.firstName}</td>
+               	<td>${user.lastName}</td>
+               	<td>${user.userName}</td>
+               	<td>${user.userPassword}</td>
+               	<td>${user.type}</td>
                 <td><a href="/user/edit/${user.id}">Edit</a></td>
                 <td><a href="/user/delete/${user.id}">Delete</a></td> 
             </tr>
