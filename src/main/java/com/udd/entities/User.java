@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -18,18 +19,23 @@ public class User {
 	private int id;
 
 	@NotNull
+	@Size(max = 30)
 	private String firstName;
 
 	@NotNull
+	@Size(max = 30)
 	private String lastName;
 
 	@NotNull
+	@Size(max = 10)
 	private String userName;
 
 	@NotNull
+	@Size(max = 10)
 	private String userPassword;
 
 	@NotNull
+	@Size(max = 30)
 	private String type;
 
 	public User() {
