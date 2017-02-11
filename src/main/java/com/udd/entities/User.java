@@ -18,23 +18,18 @@ public class User {
 	private int id;
 
 	@NotNull
-	@Length(max = 30, message = "The field must be less than {max} characters")
 	private String firstName;
 
 	@NotNull
-	@Length(max = 30, message = "The field must be less than {max} characters")
 	private String lastName;
 
 	@NotNull
-	@Length(max = 10, message = "The field must be less than {max} characters")
 	private String userName;
 
 	@NotNull
-	@Length(max = 10, message = "The field must be less than {max} characters")
 	private String userPassword;
 
 	@NotNull
-	@Length(max = 30, message = "The field must be less than {max} characters")
 	private String type;
 
 	public User() {

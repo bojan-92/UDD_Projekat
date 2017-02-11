@@ -9,19 +9,37 @@
 <body>
 <div class="container">
    
-    <h2>User Details</h2>
+    <h2>Create User</h2>
     <div>
         <form class="form-horizontal" th:object="${user}" action="/user" method="post">
             <div class="form-group">
-                <label class="col-sm-2 control-label">Name:</label>
+                <label class="col-sm-2 control-label">First Name:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="name"/>
+                    <input type="text" class="form-control" name="firstName"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">E-mail:</label>
+                <label class="col-sm-2 control-label">Last Name:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="email"/>
+                    <input type="text" class="form-control" name="lastName"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Username:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="userName"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Password:</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" name="userPassword"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Type:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="type"/>
                 </div>
             </div>
             <div class="row">

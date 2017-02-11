@@ -20,10 +20,19 @@
                         <p class="form-control-static" th:text="${user.id}">User Id: ${user.id}</p></div>
                 </div>
                 <div class="form-group">
-                    <p class="form-control-static" th:text="${user.name}">User Name: ${user.name}</p></div>
+                    <p class="form-control-static" th:text="${user.firstName}">First name: ${user.firstName}</p></div>
                 </div>
                 <div class="form-group">
-                    <p class="form-control-static" th:text="${user.email}">User e-mail: ${user.email}</p></div>
+                    <p class="form-control-static" th:text="${user.lastName}">Last name: ${user.lastName}</p></div>
+                </div>
+                <div class="form-group">
+                    <p class="form-control-static" th:text="${user.userName}">Username: ${user.userName}</p></div>
+                </div>
+                <div class="form-group">
+                    <p class="form-control-static" th:text="${user.userPassword}">Password: ${user.userPassword}</p></div>
+                </div>
+                <div class="form-group">
+                    <p class="form-control-static" th:text="${user.type}">Type: ${user.type}</p></div>
                 </div>
             </form>
     </div>

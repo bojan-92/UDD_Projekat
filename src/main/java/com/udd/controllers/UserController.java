@@ -27,48 +27,44 @@ public class UserController {
 		model.addAttribute("hello", hello);
 		return "hello";
 	}
-
-	/*@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("users", userService.listAllUsers());
-		System.out.println("Returning users:");
-		return "users";
-	}
-
-	@RequestMapping("user/{id}")
-	public String showUser(@PathVariable Integer id, Model model) {
-		model.addAttribute("user", userService.getUserById(id));
-		return "userShow";
-	}
-
-	@RequestMapping("user/edit/{id}")
-	public String edit(@PathVariable Integer id, Model model) {
-		model.addAttribute("user", userService.getUserById(id));
-		return "userEdit";
-	}
-
+	
 	@RequestMapping("user/new")
 	public String newUser(Model model) {
 		model.addAttribute("user", new User());
 		return "userForm";
 	}
 
-	@RequestMapping(value = "user", method = RequestMethod.POST)
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public String list(Model model) {
+		model.addAttribute("users", userService.listAllUsers());
+		System.out.println("Returning users:");
+		return "users";
+	}
+	@RequestMapping("user/{id}")
+	public String showUser(@PathVariable Integer id, Model model) {
+		model.addAttribute("user", userService.getUserById(id));
+		return "userShow";
+	}
+	@RequestMapping("user/edit/{id}")
+	public String edit(@PathVariable Integer id, Model model) {
+		model.addAttribute("user", userService.getUserById(id));
+		return "userEdit";
+	}
+	
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String saveUser(User user) {
 		userService.saveUser(user);
 		return "redirect:/user/" + user.getId();
 	}
-
-	@RequestMapping(value = "/user/update/{id}", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/user/update/{id}", method = RequestMethod.POST)
 	public String updateUser(@PathVariable Integer id, @RequestParam("name") String name,
 			@RequestParam("email") String email) {
 		User user = userService.getUserById(id);
-		user.setName(name);
+		user.setFirName(name);
 		user.setEmail(email);
 		userService.saveUser(user);
 		return "redirect:/user/" + user.getId();
 	}
-
 	@RequestMapping("user/delete/{id}")
 	public String delete(@PathVariable Integer id) {
 		userService.deleteUser(id);
