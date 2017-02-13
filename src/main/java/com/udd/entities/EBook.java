@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -40,7 +41,8 @@ public class EBook {
 	@Size(max = 100)
 	private String mime;
 	
-	@ManyToOne()
+	@ManyToOne
+	@JoinColumn(name = "book_language")
 	private Language bookLanguage;
 	
 	
@@ -112,6 +114,14 @@ public class EBook {
 
 	public void setMime(String mime) {
 		this.mime = mime;
+	}
+
+	public Language getBookLanguage() {
+		return bookLanguage;
+	}
+
+	public void setBookLanguage(Language bookLanguage) {
+		this.bookLanguage = bookLanguage;
 	}
 	
 	
