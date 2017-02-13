@@ -1,9 +1,13 @@
 package com.udd.entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,6 +23,12 @@ public class Category {
 	@NotNull
 	@Size(max = 30)
 	private String name;
+
+	@OneToMany(mappedBy = "bookCategory", cascade = CascadeType.ALL)
+	private Set<EBook> eBooks;
+
+	@OneToMany(mappedBy = "userCategory", cascade = CascadeType.ALL)
+	private Set<User> users;
 
 	public Category() {
 	}
@@ -43,6 +53,22 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<EBook> geteBooks() {
+		return eBooks;
+	}
+
+	public void seteBooks(Set<EBook> eBooks) {
+		this.eBooks = eBooks;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

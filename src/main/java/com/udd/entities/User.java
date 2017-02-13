@@ -4,11 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.udd.enumerations.Role;
 
 @Entity
 @Table(name = "users")
@@ -36,12 +40,16 @@ public class User {
 
 	@NotNull
 	@Size(max = 30)
-	private String type;
+	private Role type;
+		
+	@ManyToOne
+	@JoinColumn(name = "user_category")
+	private Category userCategory;
 
 	public User() {
 	}
 
-	public User(int id, String firstName, String lastName, String userName, String userPassword, String type) {
+	public User(int id, String firstName, String lastName, String userName, String userPassword, Role type) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -91,12 +99,21 @@ public class User {
 		this.userPassword = userPassword;
 	}
 
-	public String getType() {
+	public Role getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Role type) {
 		this.type = type;
 	}
 
+	public Category getUserCategory() {
+		return userCategory;
+	}
+
+	public void setUserCategory(Category userCategory) {
+		this.userCategory = userCategory;
+	}
+
+	
 }

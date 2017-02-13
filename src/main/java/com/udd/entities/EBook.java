@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,15 +24,12 @@ public class EBook {
 	@Size(max = 80)
 	private String title;
 
-	@NotNull
 	@Size(max = 120)
 	private String author;
 	
-	@NotNull
 	@Size(max = 120)
 	private String keywords;
 	
-	@NotNull
 	private int publicationYear;
 	
 	@NotNull
@@ -45,6 +44,13 @@ public class EBook {
 	@JoinColumn(name = "book_language")
 	private Language bookLanguage;
 	
+	@ManyToOne
+	@JoinColumn(name = "book_category")
+	private Category bookCategory;
+	
+	@OneToOne
+	@JoinColumn(name = "book_file")
+	private File bookFile;
 	
 	public EBook(){}
 
@@ -122,6 +128,22 @@ public class EBook {
 
 	public void setBookLanguage(Language bookLanguage) {
 		this.bookLanguage = bookLanguage;
+	}
+
+	public Category getBookCategory() {
+		return bookCategory;
+	}
+
+	public void setBookCategory(Category bookCategory) {
+		this.bookCategory = bookCategory;
+	}
+
+	public File getBookFile() {
+		return bookFile;
+	}
+
+	public void setBookFile(File bookFile) {
+		this.bookFile = bookFile;
 	}
 	
 	
