@@ -52,6 +52,11 @@
      			</select>
                 </div>
             </div>
+            <select name="category">
+            	<c:forEach var="cat" items="${categories}">
+            		<option value="${cat.id}">${cat.name }</option>
+            	</c:forEach>
+            </select>
             <div class="row">
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>

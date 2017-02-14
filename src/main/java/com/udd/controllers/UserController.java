@@ -1,8 +1,5 @@
 package com.udd.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,17 +9,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.udd.entities.User;
-import com.udd.enumerations.Role;
+import com.udd.services.CategoryService;
 import com.udd.services.UserService;
 
 @Controller
 public class UserController {
 
 	private UserService userService;
+	private CategoryService categoryService;
 
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	@Autowired
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
 	}
 
 	@RequestMapping("/hello")
@@ -35,11 +38,7 @@ public class UserController {
 	@RequestMapping("user/new")
 	public String newUser(Model model) {
 		model.addAttribute("user", new User());
-		List<String> roles = new ArrayList<>();
-		roles.add(Role.ADMINISTRATOR.toString());
-		roles.add(Role.SUBSCRIBER.toString());
-		roles.add(Role.VISITOR.toString());
-		model.addAttribute("roles", roles);
+		model.addAttribute("categories", categoryService.listAllCategories());
 		return "userAdd";
 	}
 
@@ -63,8 +62,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String saveUser(User user, @RequestParam(value = "role", required = false) String role) {
+	public String saveUser(User user, @RequestParam(value = "role", required = true) String role,
+			@RequestParam(value = "category", required = false) Integer categoryId) {
 		user.setType(role);
+		user.setUserCategory(categoryService.getCategoryById(categoryId));
 		userService.saveUser(user);
 		return "redirect:/user/" + user.getId();
 	}

@@ -20,6 +20,7 @@
                 <th>Username</th>
                 <th>Password</th>
                 <th>Type</th>
+                <th>Category</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -31,6 +32,7 @@
                	<td>${user.userName}</td>
                	<td>${user.userPassword}</td>
                	<td>${user.type}</td>
+               	<td>${user.userCategory.name}</td>
                 <td><a href="/user/edit/${user.id}">Edit</a></td>
                 <td><a href="/user/delete/${user.id}">Delete</a></td> 
             </tr>
