@@ -10,10 +10,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
-
-import com.udd.enumerations.Role;
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -40,16 +36,16 @@ public class User {
 
 	@NotNull
 	@Size(max = 30)
-	private Role type;
-		
+	private String type;
+
 	@ManyToOne
-	@JoinColumn(name = "user_category")
+	@JoinColumn(name = "user_category", nullable = true)
 	private Category userCategory;
 
 	public User() {
 	}
 
-	public User(int id, String firstName, String lastName, String userName, String userPassword, Role type) {
+	public User(int id, String firstName, String lastName, String userName, String userPassword, String type) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -99,11 +95,11 @@ public class User {
 		this.userPassword = userPassword;
 	}
 
-	public Role getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Role type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -115,5 +111,4 @@ public class User {
 		this.userCategory = userCategory;
 	}
 
-	
 }
