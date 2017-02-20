@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.udd.entities.User;
+import com.udd.finval.Role;
 import com.udd.services.CategoryService;
 import com.udd.services.UserService;
 
@@ -61,13 +62,22 @@ public class UserController {
 		return "userEdit";
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String saveUser(User user, @RequestParam(value = "role", required = true) String role,
+
 			@RequestParam(value = "category", required = false) Integer categoryId) {
 		user.setType(role);
 		user.setUserCategory(categoryService.getCategoryById(categoryId));
 		userService.saveUser(user);
 		return "redirect:/user/" + user.getId();
+	}*/
+
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public String saveUser(User user) {
+		user.setType(Role.SUBSCRIBER);
+		// user.setUserCategory();
+		userService.saveUser(user);
+		return "redirect:/user/" + user.getId(); // promeniti da se redirektuje na home page
 	}
 
 	@RequestMapping(value = "/user/update/{id}", method = RequestMethod.POST)
@@ -87,5 +97,15 @@ public class UserController {
 	public String delete(@PathVariable Integer id) {
 		userService.deleteUser(id);
 		return "redirect:/users";
+	}
+
+	@RequestMapping("/login-form")
+	public String loginForm() {
+		return "login";
+	}
+
+	@RequestMapping("/registration-form")
+	public String registrationForm() {
+		return "registration";
 	}
 }
