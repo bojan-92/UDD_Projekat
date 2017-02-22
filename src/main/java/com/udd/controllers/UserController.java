@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import com.udd.entities.User;
 import com.udd.finval.Messages;
@@ -145,8 +144,7 @@ public class UserController {
 		for (User u : users) {
 			if (usr.getId() == u.getId()) {
 				session.removeAttribute("user");
-				RequestMappingHandlerAdapter rmha = new RequestMappingHandlerAdapter();
-				rmha.setCacheSeconds(0);
+				session.invalidate();
 				return "welcome";
 			}
 		}
