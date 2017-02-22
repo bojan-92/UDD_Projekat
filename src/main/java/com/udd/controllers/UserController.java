@@ -1,5 +1,7 @@
 package com.udd.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import com.udd.entities.User;
 import com.udd.finval.Messages;
@@ -94,10 +97,11 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin(@RequestParam("userName") String userName,
-			@RequestParam("userPassword") String userPassword, Model model) {
+			@RequestParam("userPassword") String userPassword, Model model, HttpSession session) {
 		Iterable<User> users = userService.listAllUsers();
 		for (User u : users) {
 			if (u.getUserName().equals(userName) && u.getUserPassword().equals(userPassword)) {
+				session.setAttribute("user", u);
 				return "redirect:/user/" + u.getId();
 			}
 		}
@@ -132,5 +136,20 @@ public class UserController {
 	@RequestMapping("/registration-form")
 	public String registrationForm() {
 		return "registration";
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String userLogout(HttpSession session) {
+		User usr = (User) session.getAttribute("user");
+		Iterable<User> users = userService.listAllUsers();
+		for (User u : users) {
+			if (usr.getId() == u.getId()) {
+				session.removeAttribute("user");
+				RequestMappingHandlerAdapter rmha = new RequestMappingHandlerAdapter();
+				rmha.setCacheSeconds(0);
+				return "welcome";
+			}
+		}
+		return null;
 	}
 }
