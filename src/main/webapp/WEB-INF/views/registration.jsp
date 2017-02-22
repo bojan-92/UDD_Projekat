@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
+<div class="container"> 
     <h2>Sign up</h2>
     <div>
         <form class="form-horizontal" action="/registration" method="post">
@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">User name:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="userName"/>
+                    <input type="text" class="form-control" name="userName"/>${usernameExistsMessage}
                 </div>
             </div>
             <div class="form-group">
@@ -40,8 +40,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Confirm Password:</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" name="passwordConfirm"/>
-                    <p>${incorrectPasswordMessage}</p>
+                    <input type="password" class="form-control" name="passwordConfirm"/>${incorrectPasswordMessage}
                 </div>
             </div>
             <div class="row">

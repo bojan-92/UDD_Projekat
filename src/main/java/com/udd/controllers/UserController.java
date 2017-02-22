@@ -63,30 +63,46 @@ public class UserController {
 		return "userEdit";
 	}
 
-	/*
-	 * @RequestMapping(value = "/user", method = RequestMethod.POST) public
-	 * String saveUser(User user, @RequestParam(value = "role", required = true)
-	 * String role,
-	 * 
-	 * @RequestParam(value = "category", required = false) Integer categoryId) {
-	 * user.setType(role);
-	 * user.setUserCategory(categoryService.getCategoryById(categoryId));
-	 * userService.saveUser(user); return "redirect:/user/" + user.getId(); }
-	 */
+	/*@RequestMapping(value = "/user", method = RequestMethod.POST)
+	public String saveUser(User user, @RequestParam(value = "role", required = true) String role,
+			@RequestParam(value = "category", required = false) Integer categoryId) {
+		user.setType(role);
+		user.setUserCategory(categoryService.getCategoryById(categoryId));
+		userService.saveUser(user);
+		return "redirect:/user/" + user.getId();
+	}*/
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String saveUser(User user, @RequestParam("passwordConfirm") String passwordConfirm, Model model) {
-
+		Iterable<User> users = userService.listAllUsers();
+		for (User u : users) {
+			if (u.getUserName().equals(u.getUserName())) {
+				model.addAttribute("usernameExistsMessage", Messages.USER_EXISTS);
+				return "registration";
+			}
+		}
 		if (!passwordConfirm.equals(user.getUserPassword())) {
 			model.addAttribute("incorrectPasswordMessage", Messages.WRONG_PASSWORD);
-			return "redirect:/registration-form";
+			return "registration";
 		}
 		user.setType(Role.SUBSCRIBER);
 		// user.setUserCategory();
-
 		userService.saveUser(user);
 		return "redirect:/user/" + user.getId(); // promeniti da se redirektuje
 													// na home page
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String userLogin(@RequestParam("userName") String userName,
+			@RequestParam("userPassword") String userPassword, Model model) {
+		Iterable<User> users = userService.listAllUsers();
+		for (User u : users) {
+			if (u.getUserName().equals(userName) && u.getUserPassword().equals(userPassword)) {
+				return "redirect:/user/" + u.getId();
+			}
+		}
+		model.addAttribute("userNotExistsMessage", Messages.USER_NOT_EXISTS);
+		return "login";
 	}
 
 	@RequestMapping(value = "/user/update/{id}", method = RequestMethod.POST)

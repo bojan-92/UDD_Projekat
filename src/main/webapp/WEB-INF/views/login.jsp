@@ -10,17 +10,18 @@
 <div class="container">
     <h2>Sign in</h2>
     <div>
-        <form class="form-horizontal" th:object="${category}" action="/login" method="post">
+    ${userNotExistsMessage}
+        <form class="form-horizontal" action="/login" method="get">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Username:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="username"/>
+                    <input type="text" class="form-control" name="userName"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Password:</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" name="password"/>
+                    <input type="password" class="form-control" name="userPassword"/>
                 </div>
             </div>
             <div class="row">
