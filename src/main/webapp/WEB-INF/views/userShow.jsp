@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="<c:url value="/logout" />">Logout</a>
+<a href="<c:url value="" />">Logout</a>
 
 <div class="container">
     <h2>User Details</h2>

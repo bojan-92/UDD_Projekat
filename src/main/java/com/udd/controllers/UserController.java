@@ -1,7 +1,5 @@
 package com.udd.controllers;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,11 +94,10 @@ public class UserController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin(@RequestParam("userName") String userName,
-			@RequestParam("userPassword") String userPassword, Model model, HttpSession session) {
+			@RequestParam("userPassword") String userPassword, Model model) {
 		Iterable<User> users = userService.listAllUsers();
 		for (User u : users) {
 			if (u.getUserName().equals(userName) && u.getUserPassword().equals(userPassword)) {
-				session.setAttribute("user", u);
 				return "redirect:/user/" + u.getId();
 			}
 		}
@@ -137,17 +134,4 @@ public class UserController {
 		return "registration";
 	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String userLogout(HttpSession session) {
-		User usr = (User) session.getAttribute("user");
-		Iterable<User> users = userService.listAllUsers();
-		for (User u : users) {
-			if (usr.getId() == u.getId()) {
-				session.removeAttribute("user");
-				session.invalidate();
-				return "welcome";
-			}
-		}
-		return null;
-	}
 }
